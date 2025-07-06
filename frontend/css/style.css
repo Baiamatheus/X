@@ -1,0 +1,171 @@
+/* Reset básico */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #ffffff;
+  color: #0f1419;
+}
+
+main {
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 20px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+header h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+header h2 {
+  font-size: 1.25rem;
+  color: #536471;
+  margin-bottom: 10px;
+}
+
+header p {
+  font-size: 1rem;
+  color: #536471;
+}
+
+img {
+  margin: 20px auto;
+  display: block;
+  max-width: 150px;
+  height: auto;
+  border-radius: 12px;
+}
+
+/* Títulos principais */
+h1, h3 {
+  text-align: center;
+  margin: 25px 0 15px;
+  font-weight: bold;
+  line-height: 1.2;
+}
+
+h5 {
+  font-size: 0.9rem;
+  color: #536471;
+  text-align: center;
+  margin: 20px;
+  line-height: 1.4;
+}
+
+/* Botões principais */
+button {
+  display: block;
+  width: 100%;
+  padding: 12px 0;
+  margin: 12px 0;
+  border: 1px solid #000;
+  border-radius: 9999px;
+  background-color: #000;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+button:hover {
+  background-color: #272727;
+}
+
+/* Diálogos (modais) */
+dialog {
+  border: none;
+  border-radius: 12px;
+  padding: 25px;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.2);
+  background-color: #fff;
+  animation: fadeIn 0.3s ease;
+}
+
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+dialog h1 {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+dialog p {
+  margin-bottom: 20px;
+  color: #536471;
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+input, select {
+  padding: 12px;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+}
+
+input:focus, select:focus {
+  border-color: #000;
+  outline: none;
+}
+
+label {
+  font-size: 0.95rem;
+  color: #536471;
+}
+
+/* Animação suave para modais */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+  main {
+    margin: 15px;
+    padding: 15px;
+  }
+
+  header h1 {
+    font-size: 1.5rem;
+  }
+
+  header h2 {
+    font-size: 1.1rem;
+  }
+
+  button {
+    font-size: 0.95rem;
+    padding: 10px;
+  }
+}
