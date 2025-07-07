@@ -7,9 +7,10 @@ html, body {
   overflow-x: hidden;
 }
 
+
 .layout {
   display: flex;
-  min-height: 10vh;
+  min-height: 90vh;
 }
 
 .lado-esquerdo {
@@ -31,41 +32,41 @@ html, body {
 .lado-direito {
   background-color: #000;
   color: #e7e9ea;
-  padding: 40px 20px;
+  padding: 80px 60px;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+}
+.lado-direito .titulo-principal {
+  font-size: 4.5rem;
+  font-weight: bold;
+  margin: 8px 0;
 }
 
 .lado-direito .titulo-principal,
 .lado-direito .subtitulo {
   margin: 8px 0;
 }
-
 .lado-direito button {
   width: 100%;
-  max-width: 300px;
+  max-width: 400px;
   margin: 8px 0;
 }
-
 .lado-direito .separador {
-  margin: 16px 0 8px;
+  margin: 20px 8px;
   color: #71767b;
 }
-
 .lado-direito .termos {
   font-size: 0.9rem;
   color: #71767b;
   max-width: 300px;
   margin-top: 10px;
 }
-
 .lado-direito .texto-login {
   margin-top: 20px;
   font-size: 0.95rem;
 }
-
 .lado-direito .texto-login button {
   background: none;
   color: #1d9bf0;
@@ -74,9 +75,34 @@ html, body {
   cursor: pointer;
   font-size: 1rem;
 }
-
 .lado-direito .texto-login button:hover {
   text-decoration: underline;
+}
+.botao-social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: #e7e3e3;
+  color: #000000;
+  border: 1px solid #555;
+  width: 100%;
+  max-width: 400px;
+  margin: 8px 0;
+  padding: 10px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 1rem;
+}
+.botao-social:hover {
+  background-color: #333;
+  border-color: #1d9bf0;
+}
+.logo-botao {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
 }
 
 dialog {
@@ -93,86 +119,13 @@ dialog {
   transform: translateY(-50%);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
-
 dialog::backdrop {
   background: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(8px);
 }
-
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.linha-formulario {
-  display: flex;
-  gap: 12px;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-.label-select {
-  font-size: 1rem;
-  color: #e7e9ea;
-  width: 120px;
-}
-
-.campo-select {
-  flex: 1;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: #000;
-  color: #e7e9ea;
-  font-size: 1rem;
-}
-
-.campo-select:focus {
-  border-color: #1d9bf0;
-  outline: none;
-}
-
-.label-campo {
-  font-size: 1rem;
-  color: #e7e9ea;
-  display: block;
-  margin-bottom: 8px;
-}
-
-.campo {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: #000;
-  color: #e7e9ea;
-  font-size: 1rem;
-}
-
-.campo:focus {
-  border-color: #1d9bf0;
-  outline: none;
-}
-
-button {
-  background-color: #1d9bf0;
-  color: white;
-  padding: 10px;
-  border: none;
-  border-radius: 50px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-button:hover {
-  background-color: #1680bf;
-}
-
 body:has(dialog[open]) {
   overflow: hidden;
 }
-
 body:has(dialog[open])::before {
   content: "";
   position: fixed;
@@ -184,27 +137,81 @@ body:has(dialog[open])::before {
   backdrop-filter: blur(8px);
   z-index: 998;
 }
-
-
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.linha-formulario {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-start;
+  align-items: center;
+}
+.label-select {
+  font-size: 1rem;
+  color: #e7e9ea;
+  width: 120px;
+}
+.campo-select {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #000;
+  color: #e7e9ea;
+  font-size: 1rem;
+}
+.campo-select:focus {
+  border-color: #1d9bf0;
+  outline: none;
+}
+.label-campo {
+  font-size: 1rem;
+  color: #e7e9ea;
+  display: block;
+  margin-bottom: 8px;
+}
+.campo {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #000;
+  color: #e7e9ea;
+  font-size: 1rem;
+}
+.campo:focus {
+  border-color: #1d9bf0;
+  outline: none;
+}
+button {
+  background-color: #1d9bf0;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+button:hover {
+  background-color: #1680bf;
+}
 .etapa-formulario {
   display: flex;
   flex-direction: column;
 }
-
-
 .checkbox-custom {
   display: flex;
   align-items: flex-start;
   gap: 8px;
   margin: 8px 0;
 }
-
 .checkbox-label {
   font-size: 0.95rem;
   color: #e7e9ea;
   line-height: 1.4;
 }
-
 .aviso {
   font-size: 0.85rem;
   color: #71767b;
@@ -212,8 +219,6 @@ body:has(dialog[open])::before {
   max-width: 400px;
   text-align: left;
 }
-
-
 .rodape {
   background-color: #000;
   color: #71767b;
@@ -222,7 +227,6 @@ body:has(dialog[open])::before {
   font-size: 0.9rem;
   line-height: 1.6;
 }
-
 .rodape nav {
   display: flex;
   flex-wrap: wrap;
@@ -230,23 +234,19 @@ body:has(dialog[open])::before {
   gap: 5px;
   margin-bottom: 10px;
 }
-
 .rodape .link-rodape {
   color: #71767b;
   text-decoration: none;
   font-size: 0.85rem;
 }
-
 .rodape .link-rodape:hover {
   text-decoration: underline;
   color: #1d9bf0;
 }
-
 .rodape .sep-rodape {
   color: #71767b;
   padding: 0 3px;
 }
-
 .rodape .copy-rodape {
   margin: 0;
   font-size: 0.8rem;
