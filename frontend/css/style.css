@@ -1,171 +1,253 @@
-/* Reset básico */
-* {
-  box-sizing: border-box;
+html, body {
+  background-color: #000;
   margin: 0;
   padding: 0;
+  color: #e7e9ea;
+  font-family: Arial, sans-serif;
+  overflow-x: hidden;
 }
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: #ffffff;
-  color: #0f1419;
+.layout {
+  display: flex;
+  min-height: 10vh;
 }
 
-main {
-  max-width: 600px;
-  margin: 30px auto;
-  padding: 20px;
-}
-
-header {
-  text-align: center;
-  margin-bottom: 40px;
-}
-
-header h1 {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-header h2 {
-  font-size: 1.25rem;
-  color: #536471;
-  margin-bottom: 10px;
-}
-
-header p {
-  font-size: 1rem;
-  color: #536471;
-}
-
-img {
-  margin: 20px auto;
-  display: block;
-  max-width: 150px;
-  height: auto;
-  border-radius: 12px;
-}
-
-/* Títulos principais */
-h1, h3 {
-  text-align: center;
-  margin: 25px 0 15px;
-  font-weight: bold;
-  line-height: 1.2;
-}
-
-h5 {
-  font-size: 0.9rem;
-  color: #536471;
-  text-align: center;
-  margin: 20px;
-  line-height: 1.4;
-}
-
-/* Botões principais */
-button {
-  display: block;
-  width: 100%;
-  padding: 12px 0;
-  margin: 12px 0;
-  border: 1px solid #000;
-  border-radius: 9999px;
+.lado-esquerdo {
   background-color: #000;
-  color: #fff;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  box-sizing: border-box;
 }
 
-button:hover {
-  background-color: #272727;
+.lado-esquerdo .logo-img {
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+  object-fit: contain;
 }
 
-/* Diálogos (modais) */
-dialog {
+.lado-direito {
+  background-color: #000;
+  color: #e7e9ea;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.lado-direito .titulo-principal,
+.lado-direito .subtitulo {
+  margin: 8px 0;
+}
+
+.lado-direito button {
+  width: 100%;
+  max-width: 300px;
+  margin: 8px 0;
+}
+
+.lado-direito .separador {
+  margin: 16px 0 8px;
+  color: #71767b;
+}
+
+.lado-direito .termos {
+  font-size: 0.9rem;
+  color: #71767b;
+  max-width: 300px;
+  margin-top: 10px;
+}
+
+.lado-direito .texto-login {
+  margin-top: 20px;
+  font-size: 0.95rem;
+}
+
+.lado-direito .texto-login button {
+  background: none;
+  color: #1d9bf0;
   border: none;
-  border-radius: 12px;
-  padding: 25px;
-  max-width: 400px;
+  padding: 0;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.lado-direito .texto-login button:hover {
+  text-decoration: underline;
+}
+
+dialog {
   width: 90%;
-  box-shadow: 0 12px 28px rgba(0,0,0,0.2);
-  background-color: #fff;
-  animation: fadeIn 0.3s ease;
+  max-width: 500px;
+  background-color: hwb(0 0% 100%);
+  color: #eee9e9;
+  border-radius: 50px;
+  padding: 50px;
+  border: none;
+  position: relative;
+  margin: auto;
+  top: 50%;
+  transform: translateY(-50%);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
 dialog::backdrop {
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
-dialog h1 {
-  text-align: center;
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-bottom: 20px;
-}
-
-dialog p {
-  margin-bottom: 20px;
-  color: #536471;
-  text-align: center;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
 }
 
 form {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  margin-top: 10px;
 }
 
-input, select {
-  padding: 12px;
-  border: 1px solid #d9d9d9;
-  border-radius: 8px;
+.linha-formulario {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.label-select {
   font-size: 1rem;
-  transition: border-color 0.2s ease;
+  color: #e7e9ea;
+  width: 120px;
 }
 
-input:focus, select:focus {
-  border-color: #000;
+.campo-select {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #000;
+  color: #e7e9ea;
+  font-size: 1rem;
+}
+
+.campo-select:focus {
+  border-color: #1d9bf0;
   outline: none;
 }
 
-label {
+.label-campo {
+  font-size: 1rem;
+  color: #e7e9ea;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.campo {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #000;
+  color: #e7e9ea;
+  font-size: 1rem;
+}
+
+.campo:focus {
+  border-color: #1d9bf0;
+  outline: none;
+}
+
+button {
+  background-color: #1d9bf0;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #1680bf;
+}
+
+body:has(dialog[open]) {
+  overflow: hidden;
+}
+
+body:has(dialog[open])::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  z-index: 998;
+}
+
+
+.etapa-formulario {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.checkbox-custom {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 8px 0;
+}
+
+.checkbox-label {
   font-size: 0.95rem;
-  color: #536471;
+  color: #e7e9ea;
+  line-height: 1.4;
 }
 
-/* Animação suave para modais */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.aviso {
+  font-size: 0.85rem;
+  color: #71767b;
+  margin: 12px 0;
+  max-width: 400px;
+  text-align: left;
 }
 
-/* Responsivo */
-@media (max-width: 600px) {
-  main {
-    margin: 15px;
-    padding: 15px;
-  }
 
-  header h1 {
-    font-size: 1.5rem;
-  }
+.rodape {
+  background-color: #000;
+  color: #71767b;
+  text-align: center;
+  padding: 20px 10px;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
 
-  header h2 {
-    font-size: 1.1rem;
-  }
+.rodape nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5px;
+  margin-bottom: 10px;
+}
 
-  button {
-    font-size: 0.95rem;
-    padding: 10px;
-  }
+.rodape .link-rodape {
+  color: #71767b;
+  text-decoration: none;
+  font-size: 0.85rem;
+}
+
+.rodape .link-rodape:hover {
+  text-decoration: underline;
+  color: #1d9bf0;
+}
+
+.rodape .sep-rodape {
+  color: #71767b;
+  padding: 0 3px;
+}
+
+.rodape .copy-rodape {
+  margin: 0;
+  font-size: 0.8rem;
 }

@@ -1,96 +1,115 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Preencher os selects de dia e ano
-  const diaSelect = document.getElementById('dia');
-  for (let i = 1; i <= 31; i++) {
-    const option = document.createElement('option');
-    option.value = i;
-    option.textContent = i;
-    diaSelect.appendChild(option);
-  }
 
-  const anoSelect = document.getElementById('ano');
-  const currentYear = new Date().getFullYear();
-  for (let i = currentYear; i >= 1900; i--) {
-    const option = document.createElement('option');
-    option.value = i;
-    option.textContent = i;
-    anoSelect.appendChild(option);
-  }
+  document.getElementById("btn-google").addEventListener("click", () => {
+    document.getElementById("modal-google").showModal();
+  });
+  document.getElementById("btn-apple").addEventListener("click", () => {
+    document.getElementById("modal-apple").showModal();
+  });
+  document.getElementById("btn-criar").addEventListener("click", () => {
+    document.getElementById("modal-criar").showModal();
+    document.getElementById("etapa-1").style.display = "block";
+    document.getElementById("etapa-2").style.display = "none";
+  });
+  document.getElementById("btn-entrar").addEventListener("click", () => {
+    document.getElementById("modal-entrar").showModal();
+    document.getElementById("etapa-login-1").style.display = "block";
+    document.getElementById("etapa-login-2").style.display = "none";
+  });
 
-  // Abrir modais
-  document.querySelectorAll("[data-open]").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const target = document.getElementById(btn.dataset.open);
-      if (target) target.showModal();
+ 
+  document.querySelectorAll("dialog").forEach(modal => {
+    modal.addEventListener("click", e => {
+      if (e.target === modal) modal.close();
     });
   });
 
-  // Fechar modais
-  document.querySelectorAll("[data-close]").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const target = document.getElementById(btn.dataset.close);
-      if (target) target.close();
-    });
-  });
 
-  // Cadastro
-  document.getElementById("btnAvancar").addEventListener("click", async () => {
-    const nome = document.getElementById("nome").value;
-    const celular = document.getElementById("celular").value;
-    const mes = document.getElementById("mes").value;
-    const dia = document.getElementById("dia").value;
-    const ano = document.getElementById("ano").value;
+  const diaSelect = document.getElementById('campo-dia');
+  if (diaSelect) {
+    for (let i = 1; i <= 31; i++) {
+      const option = document.createElement('option');
+      option.value = i;
+      option.textContent = i;
+      diaSelect.appendChild(option);
+    }
+  }
 
-    if (!nome || !celular || !mes || !dia || !ano) {
-      alert("⚠️ Preencha todos os campos!");
+  const anoSelect = document.getElementById('campo-ano');
+  if (anoSelect) {
+    const currentYear = new Date().getFullYear();
+    for (let i = currentYear; i >= 1900; i--) {
+      const option = document.createElement('option');
+      option.value = i;
+      option.textContent = i;
+      anoSelect.appendChild(option);
+    }
+  }
+
+ 
+  document.getElementById("btn-avancar").addEventListener("click", () => {
+    const nome = document.getElementById("campo-nome").value;
+    const celular = document.getElementById("campo-celular").value;
+    const senha = document.getElementById("campo-senha").value;
+    const mes = document.getElementById("campo-mes").value;
+    const dia = document.getElementById("campo-dia").value;
+    const ano = document.getElementById("campo-ano").value;
+
+    if (!nome || !celular || !senha || !mes || !dia || !ano) {
+      alert("!Preencha todos os campos!");
       return;
     }
 
-    const nascimento = `${dia}/${mes}/${ano}`;
+    localStorage.setItem("cadastroTemp", JSON.stringify({ nome, celular, senha, nascimento: `${dia}/${mes}/${ano}` }));
 
-    try {
-      const response = await fetch('http://localhost:3000/api/cadastro', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ nome, celular, nascimento })
-      });
-
-      const result = await response.json();
-      if (response.ok) {
-        alert('✅ Cadastro realizado!');
-        document.getElementById("criarConta").close();
-      } else {
-        alert(`❌ Erro: ${result.error}`);
-      }
-    } catch (error) {
-      alert('❌ Erro ao conectar com o servidor.');
-    }
+    document.getElementById("etapa-1").style.display = "none";
+    document.getElementById("etapa-2").style.display = "block";
   });
 
-  // Login
-  document.getElementById("btnEntrar").addEventListener("click", async () => {
-    const loginCelular = document.getElementById("loginCelular").value;
+  document.getElementById("btn-concluir").addEventListener("click", () => {
+    const aceitarTermos = document.getElementById("aceitar-termos").checked;
+
+    if (!aceitarTermos) {
+      alert("!Você deve aceitar os Termos, Política de Privacidade e Uso de Cookies!");
+      return;
+    }
+
+    const temp = JSON.parse(localStorage.getItem("cadastroTemp"));
+    if (temp) {
+      localStorage.setItem("user", JSON.stringify(temp));
+      localStorage.removeItem("cadastroTemp");
+    }
+
+    document.getElementById("modal-criar").close();
+    alert('Cadastro salvo!');
+  });
+
+  
+  document.getElementById("btn-login-avancar").addEventListener("click", () => {
+    const loginCelular = document.getElementById("login-celular").value;
     if (!loginCelular) {
-      alert("⚠️ Digite o celular para login!");
+      alert("!Digite o celular para login!");
       return;
     }
 
-    try {
-      const response = await fetch('http://localhost:3000/api/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ celular: loginCelular })
-      });
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    if (storedUser && storedUser.celular === loginCelular) {
+      document.getElementById("etapa-login-1").style.display = "none";
+      document.getElementById("etapa-login-2").style.display = "block";
+    } else {
+      alert("Usuário não foi encontrado.");
+    }
+  });
 
-      const result = await response.json();
-      if (response.ok) {
-        alert(`✅ Bem-vindo, ${result.user.nome}!`);
-        document.getElementById("entrarConta").close();
-      } else {
-        alert(`❌ Erro: ${result.error}`);
-      }
-    } catch (error) {
-      alert('❌ Erro ao conectar com o servidor.');
+  document.getElementById("btn-login-final").addEventListener("click", () => {
+    const senhaInput = document.getElementById("login-senha").value;
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+
+    if (storedUser && storedUser.senha === senhaInput) {
+      document.getElementById("modal-entrar").close();
+      window.location.href = "bemvindo.html";
+    } else {
+      alert("!Senha incorreta!");
     }
   });
 });

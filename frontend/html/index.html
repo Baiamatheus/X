@@ -4,96 +4,172 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>X. O que está acontecendo/ X</title>
-  <link rel="stylesheet" href="./css/style.css" />
+  <link rel="stylesheet" href="../css/style.css" />
 </head>
 <body>
-  <main>
-    <header>
-      <h1>Acontecendo agora</h1>
-      <img src="./img/logo_x.jpg" />
-      <h2>O que está acontecendo agora</h2>
-      <p>Veja o que as pessoas estão falando sobre o X.</p>
-    </header>
+  <main class="layout">
+    <section class="lado-esquerdo">
+        <img src="../img/logo.png" alt="Logo X" class="logo-img"/>
+    </section>
+    <section class="lado-direito">
+      <h1 class="titulo-principal">Acontecendo agora</h1>
+      <h2 class="subtitulo">Inscreva-se hoje</h2>
+      <button id="btn-google" class="botao-social">Inscreva-se com Google</button>
+      <button id="btn-apple" class="botao-social">Inscreva-se com Apple</button>
 
-    <h3>Inscreva-se hoje</h3>
-    <button data-open="inscreverGoogle">Inscreva-se com Google</button>
-    <dialog id="inscreverGoogle">
-      <p>Não tem absolutamente nada.</p>
-      <button data-close="inscreverGoogle">Fechar</button>
-    </dialog>
+      <h3 class="separador">OU</h3>
 
-    <button data-open="inscreverApple">Inscreva-se com Apple</button>
-    <dialog id="inscreverApple">
-      <p>Não tem absolutamente nada.</p>
-      <button data-close="inscreverApple">Fechar</button>
-    </dialog>
+      <button id="btn-criar" class="botao-acao">Criar conta</button>
 
-    <h1>OU</h1>
-    <button data-open="criarConta">Criar conta</button>
-    <dialog id="criarConta">
-      <h1>Criar sua conta</h1>
-      <form>
-        <label for="nome">Nome</label>
-        <input type="text" id="nome" name="nome" placeholder="Nome" required />
+      <p class="termos">
+        Ao se inscrever, você concorda com os Termos de Serviço e a Política de Privacidade, incluindo o Uso de Cookies.
+      </p>
 
-        <label for="celular">Celular</label>
-        <input type="text" id="celular" name="celular" placeholder="Celular" required />
-
-        <h1>Data de nascimento</h1>
-        <h5>Isso não será exibido publicamente.</h5>
-
-        <label for="mes">Mês</label>
-        <select id="mes" name="mes" required>
-          <option value="" disabled selected>Mês</option>
-          <option value="1">Janeiro</option>
-          <option value="2">Fevereiro</option>
-          <option value="3">Março</option>
-          <option value="4">Abril</option>
-          <option value="5">Maio</option>
-          <option value="6">Junho</option>
-          <option value="7">Julho</option>
-          <option value="8">Agosto</option>
-          <option value="9">Setembro</option>
-          <option value="10">Outubro</option>
-          <option value="11">Novembro</option>
-          <option value="12">Dezembro</option>
-        </select>
-
-        <label for="dia">Dia</label>
-        <select id="dia" name="dia" required>
-          <option value="" disabled selected>Dia</option>
-        </select>
-
-        <label for="ano">Ano</label>
-        <select id="ano" name="ano" required>
-          <option value="" disabled selected>Ano</option>
-        </select>
-
-        <button type="button" id="btnAvancar">Avançar</button>
-      </form>
-      <button data-close="criarConta">Fechar</button>
-    </dialog>
-
-    <h5>
-      Ao se inscrever, você concorda com os Termos de Serviço e
-      a Política de Privacidade.
-    </h5>
-
-    <button data-open="entrarConta">Entrar</button>
-    <dialog id="entrarConta">
-      <h1>Entrar no X</h1>
-      <form>
-        <button type="button">Fazer login com o Google</button>
-        <button type="button">Fazer login com o Apple</button>
-        <h1>OU</h1>
-        <label for="loginCelular">Celular, e-mail ou nome de usuário</label>
-        <input type="text" id="loginCelular" name="celular" placeholder="Celular, e-mail ou nome de usuário" required />
-        <button type="button" id="btnEntrar">Entrar</button>
-      </form>
-      <button data-close="entrarConta">Fechar</button>
-    </dialog>
+      <p class="texto-login">
+        Já possui uma conta?
+      </p>
+      <button id="btn-entrar" class="botao-acao">Entrar</button>
+    </section>
   </main>
+  
+  <dialog id="modal-google">
+    <p>Não tem absolutamente nada.</p>
+  </dialog>
 
-  <script src="./js/app.js"></script>
+  <dialog id="modal-apple">
+    <p>Não tem absolutamente nada.</p>
+  </dialog>
+
+  <dialog id="modal-criar">
+    <div id="etapa-1" class="etapa-formulario">
+      <h1 class="titulo-formulario">Criar sua conta</h1>
+      <form>
+        <label for="campo-nome" class="label-campo"> </label>
+        <input type="text" id="campo-nome" class="campo" placeholder="Nome" required>
+
+        <label for="campo-celular" class="label-campo"> </label>
+        <input type="text" id="campo-celular" class="campo" placeholder="Celular" required>
+
+        <label for="campo-senha" class="label-campo"> </label>
+        <input type="password" id="campo-senha" class="campo" placeholder="Senha" required>
+
+        <h4 class="subtitulo-formulario">Data de nascimento</h4>
+        <h5 class="subtitulo-formulario">Isso não será exibido publicamente. Confirme sua própria idade, mesmo se esta conta for de empresa, de um animal de estimação ou outros.<div class="linha-formulario">
+          <label for="campo-mes" class="label-select"> </label>
+          <select id="campo-mes" class="campo-select" required>
+            <option value="" disabled selected>Mês</option>
+            <option value="1">Janeiro</option>
+            <option value="2">Fevereiro</option>
+            <option value="3">Março</option>
+            <option value="4">Abril</option>
+            <option value="5">Maio</option>
+            <option value="6">Junho</option>
+            <option value="7">Julho</option>
+            <option value="8">Agosto</option>
+            <option value="9">Setembro</option>
+            <option value="10">Outubro</option>
+            <option value="11">Novembro</option>
+            <option value="12">Dezembro</option>
+          </select>
+
+          <label for="campo-dia" class="label-select"> </label>
+          <select id="campo-dia" class="campo-select" required>
+            <option value="" disabled selected>Dia</option>
+          </select>
+
+          <label for="campo-ano" class="label-select"> </label>
+          <select id="campo-ano" class="campo-select" required>
+            <option value="" disabled selected>Ano</option>
+          </select>
+        </div>
+
+        <button type="button" id="btn-avancar" class="botao-acao">Avançar</button>
+      </form>
+    </div>
+
+    <div id="etapa-2" class="etapa-formulario" style="display:none;">
+      <h1 class="titulo-formulario">Personalize sua experiência</h1>
+      <div class="checkbox-custom">
+        <input type="checkbox" id="op-conectar">
+        <label for="op-conectar" class="checkbox-label">
+          Conecte-se com as pessoas que você conhece...
+        </label>
+      </div>
+      <div class="checkbox-custom">
+        <input type="checkbox" id="op-anuncios">
+        <label for="op-anuncios" class="checkbox-label">
+          Você vê anúncios no X de acordo com sua atividade...
+        </label>
+      </div>
+      <div class="checkbox-custom">
+        <input type="checkbox" id="op-identidade">
+        <label for="op-identidade" class="checkbox-label">
+          Personalizar de acordo com sua identidade inferida...
+        </label>
+      </div>
+      <div class="checkbox-custom">
+        <input type="checkbox" id="op-localizacao">
+        <label for="op-localizacao" class="checkbox-label">
+          Personalizar com base nos lugares onde você esteve...
+        </label>
+      </div>
+      <div class="checkbox-custom">
+        <input type="checkbox" id="op-parceiros">
+        <label for="op-parceiros" class="checkbox-label">
+          Permitir o compartilhamento de informações adicionais...
+        </label>
+      </div>
+
+      <div class="aviso">
+        Ao se inscrever, você concorda com nossos Termos, com a Política de Privacidade e com o Uso de Cookies.
+      </div>
+
+      <label class="checkbox-label">
+        <input type="checkbox" id="aceitar-termos">
+        Aceito os Termos, Política de Privacidade e Uso de Cookies.
+      </label>
+
+      <button id="btn-concluir" class="botao-acao">Concluir cadastro</button>
+    </div>
+  </dialog>
+
+  <dialog id="modal-entrar">
+    <div id="etapa-login-1" class="etapa-formulario">
+      <h1 class="titulo-formulario">Entrar no X</h1>
+      <form>
+        <label for="login-celular" class="label-campo">Celular, e-mail ou nome de usuário</label>
+        <input type="text" id="login-celular" class="campo" required>
+        <button type="button" id="btn-login-avancar" class="botao-acao">Avançar</button>
+      </form>
+    </div>
+    <div id="etapa-login-2" class="etapa-formulario" style="display:none;">
+      <h1 class="titulo-formulario">Digite sua senha</h1>
+      <input type="password" id="login-senha" class="campo" placeholder="Senha" required>
+      <button type="button" id="btn-login-final" class="botao-acao">Entrar</button>
+    </div>
+  </dialog>
+
+  <footer class="rodape">
+    <nav>
+      <a href="#" class="link-rodape">Sobre</a>
+      <span class="sep-rodape">|</span>
+      <a href="#" class="link-rodape">Baixe o aplicativo do X</a>
+      <span class="sep-rodape">|</span>
+      <a href="#" class="link-rodape">Central de Ajuda</a>
+      <span class="sep-rodape">|</span>
+      <a href="#" class="link-rodape">Termos de Serviço</a>
+      <span class="sep-rodape">|</span>
+      <a href="#" class="link-rodape">Política de Privacidade</a>
+      <span class="sep-rodape">|</span>
+      <a href="#" class="link-rodape">Política de cookies</a>
+      <span class="sep-rodape">|</span>
+      <a href="#" class="link-rodape">Acessibilidade</a>
+      <span class="sep-rodape">|</span>
+      <a href="#" class="link-rodape">Configurações</a>
+      <p class="copy-rodape">| © 2025 X Corp.</p>
+    </nav>
+  </footer>
+
+  <script src="../js/app.js"></script>
 </body>
 </html>
