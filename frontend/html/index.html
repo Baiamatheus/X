@@ -52,13 +52,13 @@
       <h1 class="titulo-formulario">Criar sua conta</h1>
       <form>
         <label for="campo-nome" class="label-campo"> </label>
-        <input type="text" id="campo-nome" class="campo" placeholder="Nome" required>
+        <input type="text" id="campo-nome" class="campo"  maxlength="100" placeholder="Nome" required>
 
         <label for="campo-celular" class="label-campo"> </label>
-        <input type="text" id="campo-celular" class="campo" placeholder="Celular" required>
+        <input type="text" id="campo-celular" class="campo" maxlength="11" placeholder="Celular" required>
 
         <label for="campo-senha" class="label-campo"> </label>
-        <input type="password" id="campo-senha" class="campo" placeholder="Senha" required>
+        <input type="password" id="campo-senha" class="campo" maxlength="50" placeholder="Senha" required>
 
         <h4 class="subtitulo-formulario">Data de nascimento</h4>
         <h5 class="subtitulo-formulario">Isso não será exibido publicamente. Confirme sua própria idade, mesmo se esta conta for de empresa, de um animal de estimação ou outros.<div class="linha-formulario">
@@ -144,14 +144,14 @@
     <div id="etapa-login-1" class="etapa-formulario">
       <h1 class="titulo-formulario">Entrar no X</h1>
       <form>
-        <label for="login-celular" class="label-campo">Celular</label>
-        <input type="text" id="login-celular" class="campo" required>
+        <label for="login-celular" class="label-campo"> </label>
+        <input type="text" id="login-celular" class="campo" maxlength="11" placeholder="Celular" required>
         <button type="button" id="btn-login-avancar" class="botao-acao">Avançar</button>
       </form>
     </div>
     <div id="etapa-login-2" class="etapa-formulario" style="display:none;">
       <h1 class="titulo-formulario">Digite sua senha</h1>
-      <input type="password" id="login-senha" class="campo" placeholder="Senha" required>
+      <input type="password" id="login-senha" class="campo" placeholder="Senha" maxlength="50" required>
       <button type="button" id="btn-login-final" class="botao-acao">Entrar</button>
     </div>
   </dialog>
