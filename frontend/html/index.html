@@ -7,29 +7,31 @@
   <link rel="stylesheet" href="../css/style.css" />
 </head>
 <body>
+  <div class="escala-site">
   <main class="layout">
     <section class="lado-esquerdo">
-        <img src="../img/logo.png" alt="Logo X" class="logo-img"/>
+      <img src="../img/logo.png" alt="Logo X" class="logo-img"/>
     </section>
     <section class="lado-direito">
       <h1 class="titulo-principal">Acontecendo agora</h1>
       <h2 class="subtitulo">Inscreva-se hoje</h2>
+      
       <button id="btn-google" class="botao-social">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Logo_2013_Google.png" alt="Google logo" class="logo-botao">
-  Inscreva-se com Google
-</button>
+        <img src="https://img.icons8.com/color/48/000000/google-logo.png" alt="Google logo" class="logo-botao">
+        Inscreva-se com Google
+      </button>
 
-<button id="btn-apple" class="botao-social">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple logo" class="logo-botao">
-  Inscreva-se com Apple
-</button>
+      <button id="btn-apple" class="botao-social">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple logo" class="logo-botao">
+        Inscreva-se com Apple
+      </button>
 
       <h3 class="separador">OU</h3>
 
       <button id="btn-criar" class="botao-acao">Criar conta</button>
 
       <p class="termos">
-        Ao se inscrever, você concorda com os Termos de Serviço e a Política de Privacidade, incluindo o Uso de Cookies.
+        Ao se inscrever, você concorda com os <span class="destaque">Termos de Serviço</span> e a <span class="destaque">Política de Privacidade</span>, incluindo o <span class="destaque">Uso de Cookies</span>.
       </p>
 
       <p class="texto-login">
@@ -38,30 +40,53 @@
       <button id="btn-entrar" class="botao-acao">Entrar</button>
     </section>
   </main>
+
   
   <dialog id="modal-google">
+    <button class="btn-fechar" id="btn-fechar-google">x</button>
     <p>Não tem absolutamente nada.</p>
   </dialog>
 
   <dialog id="modal-apple">
+    <button class="btn-fechar" id="btn-fechar-apple">X</button>
     <p>Não tem absolutamente nada.</p>
   </dialog>
 
   <dialog id="modal-criar">
+    <button class="btn-fechar" id="btn-fechar-criar">X</button>
+   
     <div id="etapa-1" class="etapa-formulario">
       <h1 class="titulo-formulario">Criar sua conta</h1>
       <form>
         <label for="campo-nome" class="label-campo"> </label>
-        <input type="text" id="campo-nome" class="campo"  maxlength="100" placeholder="Nome" required>
+        <input type="text" id="campo-nome" class="campo"
+               minlength="6" maxlength="12"
+               pattern="^[a-zA-Z0-9_]{6,12}$"
+               placeholder="Nome de usuário"
+               required
+               title="De 6 a 12 caracteres. Letras, números e _">
 
         <label for="campo-celular" class="label-campo"> </label>
-        <input type="text" id="campo-celular" class="campo" maxlength="11" placeholder="Celular" required>
+        <input type="tel" id="campo-celular" class="campo"
+               placeholder="Celular"
+               pattern="^\d{11}$"
+               maxlength="15"
+               required
+               title="Digite exatamente 11 números.">
 
         <label for="campo-senha" class="label-campo"> </label>
-        <input type="password" id="campo-senha" class="campo" maxlength="50" placeholder="Senha" required>
+        <input type="password" id="campo-senha" class="campo"
+               maxlength="50"
+               pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z0-9]).{8,}$"
+               placeholder="Senha"
+               required
+               title="Mín. 8 caracteres, com maiúscula, minúscula, número e especial.">
+        <button type="button" id="toggle-senha-cadastro" class="btn-toggle-senha">👁️</button>
 
         <h4 class="subtitulo-formulario">Data de nascimento</h4>
-        <h5 class="subtitulo-formulario">Isso não será exibido publicamente. Confirme sua própria idade, mesmo se esta conta for de empresa, de um animal de estimação ou outros.<div class="linha-formulario">
+        <p class="texto-explicativo">Isso não será exibido publicamente. Confirme sua própria idade, mesmo se esta conta for de empresa, de um animal de estimação ou outros.</p>
+
+        <div class="linha-formulario">
           <label for="campo-mes" class="label-select"> </label>
           <select id="campo-mes" class="campo-select" required>
             <option value="" disabled selected>Mês</option>
@@ -93,65 +118,34 @@
         <button type="button" id="btn-avancar" class="botao-acao">Avançar</button>
       </form>
     </div>
-
-    <div id="etapa-2" class="etapa-formulario" style="display:none;">
-      <h1 class="titulo-formulario">Personalize sua experiência</h1>
-      <div class="checkbox-custom">
-        <input type="checkbox" id="op-conectar">
-        <label for="op-conectar" class="checkbox-label">
-          Conecte-se com as pessoas que você conhece...
-        </label>
-      </div>
-      <div class="checkbox-custom">
-        <input type="checkbox" id="op-anuncios">
-        <label for="op-anuncios" class="checkbox-label">
-          Você vê anúncios no X de acordo com sua atividade...
-        </label>
-      </div>
-      <div class="checkbox-custom">
-        <input type="checkbox" id="op-identidade">
-        <label for="op-identidade" class="checkbox-label">
-          Personalizar de acordo com sua identidade inferida...
-        </label>
-      </div>
-      <div class="checkbox-custom">
-        <input type="checkbox" id="op-localizacao">
-        <label for="op-localizacao" class="checkbox-label">
-          Personalizar com base nos lugares onde você esteve...
-        </label>
-      </div>
-      <div class="checkbox-custom">
-        <input type="checkbox" id="op-parceiros">
-        <label for="op-parceiros" class="checkbox-label">
-          Permitir o compartilhamento de informações adicionais...
-        </label>
-      </div>
-
-      <div class="aviso">
-        Ao se inscrever, você concorda com nossos Termos, com a Política de Privacidade e com o Uso de Cookies.
-      </div>
-
-      <label class="checkbox-label">
-        <input type="checkbox" id="aceitar-termos">
-        Aceito os Termos, Política de Privacidade e Uso de Cookies.
-      </label>
-
-      <button id="btn-concluir" class="botao-acao">Concluir cadastro</button>
-    </div>
   </dialog>
 
+  
   <dialog id="modal-entrar">
+    <button class="btn-fechar" id="btn-fechar-entrar">X</button>
     <div id="etapa-login-1" class="etapa-formulario">
       <h1 class="titulo-formulario">Entrar no X</h1>
+      <button id="btn-google" class="botao-social">
+        <img src="https://img.icons8.com/color/48/000000/google-logo.png"" alt="Google logo" class="logo-botao">
+        Entrar com Google
+      </button>
+
+      <button id="btn-apple" class="botao-social">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple logo" class="logo-botao">
+        Entrar com Apple
+      </button>
+
+      <h3 class="separador" id="separadorEntrar">OU</h3>
       <form>
         <label for="login-celular" class="label-campo"> </label>
-        <input type="text" id="login-celular" class="campo" maxlength="11" placeholder="Celular" required>
+        <input type="text" id="login-celular" class="campo" maxlength="15" placeholder="Celular" required>
         <button type="button" id="btn-login-avancar" class="botao-acao">Avançar</button>
       </form>
     </div>
     <div id="etapa-login-2" class="etapa-formulario" style="display:none;">
       <h1 class="titulo-formulario">Digite sua senha</h1>
       <input type="password" id="login-senha" class="campo" placeholder="Senha" maxlength="50" required>
+      <button type="button" id="toggle-senha-login" class="btn-toggle-senha">👁️</button>
       <button type="button" id="btn-login-final" class="botao-acao">Entrar</button>
     </div>
   </dialog>
@@ -176,7 +170,7 @@
       <p class="copy-rodape">| © 2025 X Corp.</p>
     </nav>
   </footer>
-
+  </div>
   <script src="../js/app.js"></script>
 </body>
 </html>

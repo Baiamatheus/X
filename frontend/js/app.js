@@ -1,115 +1,178 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  document.getElementById("btn-google").addEventListener("click", () => {
-    document.getElementById("modal-google").showModal();
-  });
-  document.getElementById("btn-apple").addEventListener("click", () => {
-    document.getElementById("modal-apple").showModal();
-  });
+  /** ======================
+   * BOTÕES PARA ABRIR OS MODAIS
+   * ====================== */
+
+  document.querySelectorAll("#btn-google").forEach(btn =>
+    btn.addEventListener("click", () => {
+      document.getElementById("modal-google").showModal();
+    })
+  );
+
+  document.querySelectorAll("#btn-apple").forEach(btn =>
+    btn.addEventListener("click", () => {
+      document.getElementById("modal-apple").showModal();
+    })
+  );
+
   document.getElementById("btn-criar").addEventListener("click", () => {
     document.getElementById("modal-criar").showModal();
     document.getElementById("etapa-1").style.display = "block";
-    document.getElementById("etapa-2").style.display = "none";
   });
+
   document.getElementById("btn-entrar").addEventListener("click", () => {
     document.getElementById("modal-entrar").showModal();
     document.getElementById("etapa-login-1").style.display = "block";
     document.getElementById("etapa-login-2").style.display = "none";
   });
 
- 
-  document.querySelectorAll("dialog").forEach(modal => {
-    modal.addEventListener("click", e => {
-      if (e.target === modal) modal.close();
-    });
+  /** ======================
+   * BOTÕES PARA FECHAR OS MODAIS
+   * ====================== */
+
+  document.getElementById("btn-fechar-google").addEventListener("click", () => {
+    document.getElementById("modal-google").close();
+  });
+
+  document.getElementById("btn-fechar-apple").addEventListener("click", () => {
+    document.getElementById("modal-apple").close();
+  });
+
+  document.getElementById("btn-fechar-criar").addEventListener("click", () => {
+    document.getElementById("modal-criar").close();
+  });
+
+  document.getElementById("btn-fechar-entrar").addEventListener("click", () => {
+    document.getElementById("modal-entrar").close();
   });
 
 
-  const diaSelect = document.getElementById('campo-dia');
-  if (diaSelect) {
-    for (let i = 1; i <= 31; i++) {
-      const option = document.createElement('option');
-      option.value = i;
-      option.textContent = i;
-      diaSelect.appendChild(option);
-    }
-  }
+  /** ======================
+   * ETAPAS DO LOGIN
+   * ====================== */
 
-  const anoSelect = document.getElementById('campo-ano');
-  if (anoSelect) {
-    const currentYear = new Date().getFullYear();
-    for (let i = currentYear; i >= 1900; i--) {
-      const option = document.createElement('option');
-      option.value = i;
-      option.textContent = i;
-      anoSelect.appendChild(option);
+  document.getElementById("btn-login-avancar").addEventListener("click", () => {
+    const celular = limparMascaraCelular(document.getElementById("login-celular").value.trim());
+    if (!/^\d{11}$/.test(celular)) {
+      alert("Digite um celular válido com 11 números.");
+      return;
     }
-  }
 
- 
+    document.getElementById("etapa-login-1").style.display = "none";
+    document.getElementById("etapa-login-2").style.display = "block";
+  });
+
+  document.getElementById("btn-login-final").addEventListener("click", () => {
+    const senha = document.getElementById("login-senha").value;
+    if (!senha) {
+      alert("Digite sua senha.");
+      return;
+    }
+
+    const nomeUsuario = localStorage.getItem("nomeUsuario") || "usuário";
+    alert(`Bem-vindo, ${nomeUsuario}!`);
+
+    document.getElementById("modal-entrar").close();
+    window.location.href = "bemvindo.html";
+  });
+
+
+  /** ======================
+   * BOTÃO AVANÇAR DO CADASTRO
+   * ====================== */
   document.getElementById("btn-avancar").addEventListener("click", () => {
-    const nome = document.getElementById("campo-nome").value;
-    const celular = document.getElementById("campo-celular").value;
-    const senha = document.getElementById("campo-senha").value;
+    const nome = document.getElementById("campo-nome").value.trim();
+    const celular = limparMascaraCelular(document.getElementById("campo-celular").value.trim());
+    const senha = document.getElementById("campo-senha").value.trim();
     const mes = document.getElementById("campo-mes").value;
     const dia = document.getElementById("campo-dia").value;
     const ano = document.getElementById("campo-ano").value;
 
     if (!nome || !celular || !senha || !mes || !dia || !ano) {
-      alert("!Preencha todos os campos!");
+      alert("Preencha todos os campos.");
       return;
     }
 
-    localStorage.setItem("cadastroTemp", JSON.stringify({ nome, celular, senha, nascimento: `${dia}/${mes}/${ano}` }));
-
-    document.getElementById("etapa-1").style.display = "none";
-    document.getElementById("etapa-2").style.display = "block";
-  });
-
-  document.getElementById("btn-concluir").addEventListener("click", () => {
-    const aceitarTermos = document.getElementById("aceitar-termos").checked;
-
-    if (!aceitarTermos) {
-      alert("!Você deve aceitar os Termos, Política de Privacidade e Uso de Cookies!");
+    if (!/^\d{11}$/.test(celular)) {
+      alert("Celular deve ter 11 números.");
       return;
     }
 
-    const temp = JSON.parse(localStorage.getItem("cadastroTemp"));
-    if (temp) {
-      localStorage.setItem("user", JSON.stringify(temp));
-      localStorage.removeItem("cadastroTemp");
+    if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z0-9]).{8,}$/.test(senha)) {
+      alert("Senha deve ter maiúscula, minúscula, número e caracter especial (mín. 8).");
+      return;
     }
 
+    localStorage.setItem("nomeUsuario", nome);
+
+    alert(`Conta criada com sucesso, ${nome}!`);
     document.getElementById("modal-criar").close();
-    alert('Cadastro salvo!');
   });
 
-  
-  document.getElementById("btn-login-avancar").addEventListener("click", () => {
-    const loginCelular = document.getElementById("login-celular").value;
-    if (!loginCelular) {
-      alert("!Digite o celular para login!");
-      return;
-    }
 
-    const storedUser = JSON.parse(localStorage.getItem("user"));
-    if (storedUser && storedUser.celular === loginCelular) {
-      document.getElementById("etapa-login-1").style.display = "none";
-      document.getElementById("etapa-login-2").style.display = "block";
-    } else {
-      alert("Usuário não foi encontrado.");
-    }
+  /** ======================
+   * POPULAR SELECT DE DIAS E ANOS
+   * ====================== */
+
+  const selectDia = document.getElementById("campo-dia");
+  const selectAno = document.getElementById("campo-ano");
+
+  for (let i = 1; i <= 31; i++) {
+    const opt = document.createElement("option");
+    opt.value = i;
+    opt.textContent = i;
+    selectDia.appendChild(opt);
+  }
+
+  const anoAtual = new Date().getFullYear();
+  for (let i = anoAtual; i >= 1900; i--) {
+    const opt = document.createElement("option");
+    opt.value = i;
+    opt.textContent = i;
+    selectAno.appendChild(opt);
+  }
+
+
+  /** ======================
+   * MÁSCARA DE CELULAR
+   * ====================== */
+
+  function aplicarMascaraCelular(valor) {
+    return valor
+      .replace(/\D/g, "")
+      .replace(/^(\d{2})(\d)/, "($1) $2")
+      .replace(/(\d{5})(\d)/, "$1-$2")
+      .slice(0, 15);
+  }
+
+  function limparMascaraCelular(valor) {
+    return valor.replace(/\D/g, "");
+  }
+
+  ["campo-celular", "login-celular"].forEach(id => {
+    const input = document.getElementById(id);
+    input.addEventListener("input", () => {
+      input.value = aplicarMascaraCelular(input.value);
+    });
   });
 
-  document.getElementById("btn-login-final").addEventListener("click", () => {
-    const senhaInput = document.getElementById("login-senha").value;
-    const storedUser = JSON.parse(localStorage.getItem("user"));
 
-    if (storedUser && storedUser.senha === senhaInput) {
-      document.getElementById("modal-entrar").close();
-      window.location.href = "bemvindo.html";
-    } else {
-      alert("!Senha incorreta!");
-    }
+  /** ======================
+   * TOGGLE SENHA (olhinho)
+   * ====================== */
+
+  function toggleSenha(inputId) {
+    const input = document.getElementById(inputId);
+    input.type = input.type === "password" ? "text" : "password";
+  }
+
+  document.getElementById("toggle-senha-cadastro").addEventListener("click", () => {
+    toggleSenha("campo-senha");
   });
+
+  document.getElementById("toggle-senha-login").addEventListener("click", () => {
+    toggleSenha("login-senha");
+  });
+
 });
