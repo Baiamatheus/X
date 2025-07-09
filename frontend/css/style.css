@@ -4,7 +4,7 @@
   padding: 0;
 }
 body {
-  overflow: hidden;
+  /*overflow: hidden;*/
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -143,6 +143,7 @@ body {
   object-fit: contain;
 }
 dialog {
+  overflow: hidden;
   width: 90%;
   max-width: 400px;
   max-height: 600px;
@@ -177,8 +178,6 @@ dialog::backdrop {
   background: rgba(94, 90, 90, 0.7);
   backdrop-filter: blur(1px);
 }
-body:has(dialog[open]) {
-  overflow: hidden;
 }
 body:has(dialog[open])::before {
   content: "";

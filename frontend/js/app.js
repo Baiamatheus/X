@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+  
+
   document.querySelectorAll("#btn-google").forEach(btn =>
     btn.addEventListener("click", () => {
       document.getElementById("modal-google").showModal();
@@ -40,18 +42,24 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!/^\d{11}$/.test(celular)) {
       alert("Digite um celular válido com 11 números.");
       return;
+    
     }
+    if (!localStorage.getItem("celularUsuario") || localStorage.getItem("celularUsuario") !== celular) {
+      alert("Celular não cadastrado. Por favor, crie uma conta.");    
+      return;
+    }
+    
 
     document.getElementById("etapa-login-1").style.display = "none";
     document.getElementById("etapa-login-2").style.display = "block";
   });
 
   document.getElementById("btn-login-final").addEventListener("click", () => {
-    const senha = document.getElementById("login-senha").value;
-    if (!senha) {
-      alert("Digite sua senha.");
+    const senha = document.getElementById("login-senha").value.trim();
+    if (!localStorage.getItem("senhaUsuario") || localStorage.getItem("senhaUsuario") !==senha) {
+      alert("Senha incorreta.");
       return;
-    }
+    } 
 
     const nomeUsuario = localStorage.getItem("nomeUsuario") || "usuário";
     alert(`Bem-vindo, ${nomeUsuario}!`);
@@ -72,10 +80,17 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
+     /*if (nome.includes(" ")) {
+      alert("Não em usuário pode haver espaços.");
+      return;
+    }*/
+
     if (!/^\d{11}$/.test(celular)) {
       alert("Celular deve ter 11 números.");
       return;
     }
+
+   
 
     if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z0-9]).{8,}$/.test(senha)) {
       alert("Senha deve ter maiúscula, minúscula, número e caracter especial (mín. 8).");
@@ -83,6 +98,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     localStorage.setItem("nomeUsuario", nome);
+    localStorage.setItem("celularUsuario", celular);
+    localStorage.setItem("senhaUsuario", senha);
 
     alert(`Conta criada com sucesso, ${nome}!`);
     document.getElementById("modal-criar").close();
@@ -135,5 +152,15 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("toggle-senha-login").addEventListener("click", () => {
     toggleSenha("login-senha");
   });
-
+  localStorage.clear();
+  ["campo-nome", "campo-senha", "login-senha"].forEach(id => {
+    const input = document.getElementById(id);
+    input.addEventListener("keydown", function(event) {
+      if (event.key === " ") {
+        event.preventDefault();
+        alert("Espaços não são permitidos.");
+      }
+    });
+  });
+  
 });
