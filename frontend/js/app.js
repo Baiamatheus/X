@@ -1,36 +1,24 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  /** ======================
-   * BOTÕES PARA ABRIR OS MODAIS
-   * ====================== */
-
   document.querySelectorAll("#btn-google").forEach(btn =>
     btn.addEventListener("click", () => {
       document.getElementById("modal-google").showModal();
     })
   );
-
   document.querySelectorAll("#btn-apple").forEach(btn =>
     btn.addEventListener("click", () => {
       document.getElementById("modal-apple").showModal();
     })
   );
-
   document.getElementById("btn-criar").addEventListener("click", () => {
     document.getElementById("modal-criar").showModal();
     document.getElementById("etapa-1").style.display = "block";
   });
-
   document.getElementById("btn-entrar").addEventListener("click", () => {
     document.getElementById("modal-entrar").showModal();
     document.getElementById("etapa-login-1").style.display = "block";
     document.getElementById("etapa-login-2").style.display = "none";
   });
-
-  /** ======================
-   * BOTÕES PARA FECHAR OS MODAIS
-   * ====================== */
-
   document.getElementById("btn-fechar-google").addEventListener("click", () => {
     document.getElementById("modal-google").close();
   });
@@ -46,11 +34,6 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("btn-fechar-entrar").addEventListener("click", () => {
     document.getElementById("modal-entrar").close();
   });
-
-
-  /** ======================
-   * ETAPAS DO LOGIN
-   * ====================== */
 
   document.getElementById("btn-login-avancar").addEventListener("click", () => {
     const celular = limparMascaraCelular(document.getElementById("login-celular").value.trim());
@@ -76,11 +59,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("modal-entrar").close();
     window.location.href = "bemvindo.html";
   });
-
-
-  /** ======================
-   * BOTÃO AVANÇAR DO CADASTRO
-   * ====================== */
   document.getElementById("btn-avancar").addEventListener("click", () => {
     const nome = document.getElementById("campo-nome").value.trim();
     const celular = limparMascaraCelular(document.getElementById("campo-celular").value.trim());
@@ -109,12 +87,6 @@ document.addEventListener("DOMContentLoaded", () => {
     alert(`Conta criada com sucesso, ${nome}!`);
     document.getElementById("modal-criar").close();
   });
-
-
-  /** ======================
-   * POPULAR SELECT DE DIAS E ANOS
-   * ====================== */
-
   const selectDia = document.getElementById("campo-dia");
   const selectAno = document.getElementById("campo-ano");
 
@@ -132,12 +104,6 @@ document.addEventListener("DOMContentLoaded", () => {
     opt.textContent = i;
     selectAno.appendChild(opt);
   }
-
-
-  /** ======================
-   * MÁSCARA DE CELULAR
-   * ====================== */
-
   function aplicarMascaraCelular(valor) {
     return valor
       .replace(/\D/g, "")
@@ -156,11 +122,6 @@ document.addEventListener("DOMContentLoaded", () => {
       input.value = aplicarMascaraCelular(input.value);
     });
   });
-
-
-  /** ======================
-   * TOGGLE SENHA (olhinho)
-   * ====================== */
 
   function toggleSenha(inputId) {
     const input = document.getElementById(inputId);
