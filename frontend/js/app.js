@@ -80,11 +80,6 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-     /*if (nome.includes(" ")) {
-      alert("Não em usuário pode haver espaços.");
-      return;
-    }*/
-
     if (!/^\d{11}$/.test(celular)) {
       alert("Celular deve ter 11 números.");
       return;
